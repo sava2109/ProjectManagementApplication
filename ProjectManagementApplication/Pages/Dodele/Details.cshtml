@@ -1,0 +1,20 @@
+﻿@page "{id:int}"
+@model ProjectManagementApplication.Pages.Dodele.DetailsModel
+@{
+    ViewData["Title"] = "Detalji dodele zadatka";
+}
+
+<h1>Detalji dodele zadatka</h1>
+
+<div class="mb-3">
+    <p><strong>Aktivnost:</strong> @Model.Dodela.Aktivnost.Naziv</p>
+</div>
+
+<div class="mb-3">
+    <p><strong>Zaposleni:</strong> @Model.Dodela.Zaposleni.Ime @Model.Dodela.Zaposleni.Prezime</p>
+</div>
+
+<div class="mt-4">
+    <a asp-page="Edit" asp-route-id="@Model.Dodela.Id" class="btn btn-warning">Izmeni</a>
+    <a asp-page="Index" class="btn btn-secondary">Nazad</a>
+</div>

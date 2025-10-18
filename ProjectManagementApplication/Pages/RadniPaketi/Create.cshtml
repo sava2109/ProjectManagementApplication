@@ -1,0 +1,42 @@
+﻿@page
+@model ProjectManagementApplication.Pages.RadniPaketi.CreateModel
+@{
+    ViewData["Title"] = "Dodaj Radni Paket";
+}
+
+<h1>Dodaj Radni Paket</h1>
+
+<form method="post">
+    <div class="mb-3">
+        <label asp-for="RadniPaket.Naziv" class="form-label"></label>
+        <input asp-for="RadniPaket.Naziv" class="form-control" />
+        <span asp-validation-for="RadniPaket.Naziv" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="RadniPaket.Opis" class="form-label"></label>
+        <textarea asp-for="RadniPaket.Opis" class="form-control"></textarea>
+        <span asp-validation-for="RadniPaket.Opis" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="RadniPaket.PlaniraniSati" class="form-label"></label>
+        <input asp-for="RadniPaket.PlaniraniSati" type="number" class="form-control" />
+        <span asp-validation-for="RadniPaket.PlaniraniSati" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="RadniPaket.ProjekatId" class="form-label"></label>
+        <select asp-for="RadniPaket.ProjekatId" class="form-select" asp-items="Model.ProjektiLista">
+            <option value="">-- Izaberite projekat --</option>
+        </select>
+        <span asp-validation-for="RadniPaket.ProjekatId" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-success">Dodaj</button>
+    <a asp-page="Index" class="btn btn-secondary">Nazad</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

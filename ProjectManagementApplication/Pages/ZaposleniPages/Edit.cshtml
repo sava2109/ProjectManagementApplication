@@ -1,0 +1,38 @@
+﻿@page "{id:int}"
+@model ProjectManagementApplication.Pages.ZaposleniPages.EditModel
+@{
+    ViewData["Title"] = "Izmeni Zaposlenog";
+}
+
+<h1>Izmeni Zaposlenog</h1>
+
+<form method="post">
+    <input type="hidden" asp-for="Zaposleni.Id" />
+
+    <div class="mb-3">
+        <label asp-for="Zaposleni.Ime" class="form-label"></label>
+        <input asp-for="Zaposleni.Ime" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Zaposleni.Prezime" class="form-label"></label>
+        <input asp-for="Zaposleni.Prezime" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Zaposleni.Email" class="form-label"></label>
+        <input asp-for="Zaposleni.Email" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Zaposleni.Pozicija" class="form-label"></label>
+        <input asp-for="Zaposleni.Pozicija" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-success">Sačuvaj</button>
+    <a asp-page="Index" class="btn btn-secondary">Nazad</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

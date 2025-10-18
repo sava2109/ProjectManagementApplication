@@ -1,0 +1,18 @@
+﻿@page "{id:int}"
+@model ProjectManagementApplication.Pages.Aktivnosti.DetailsModel
+@{
+    ViewData["Title"] = "Detalji Aktivnosti";
+}
+
+<h1>Detalji Aktivnosti</h1>
+
+<div>
+    <p><strong>Naziv:</strong> @Model.Aktivnost.Naziv</p>
+    <p><strong>Opis:</strong> @Model.Aktivnost.Opis</p>
+    <p><strong>Planirani sati:</strong> @Model.Aktivnost.PlaniraniSati</p>
+    <p><strong>Zadatak:</strong> @Model.Aktivnost.Zadatak?.Naziv</p>
+    <p><strong>Status:</strong> @Model.Aktivnost.Status</p>
+</div>
+
+<a asp-page="Edit" asp-route-id="@Model.Aktivnost.Id" class="btn btn-warning">Izmeni</a>
+<a asp-page="Index" class="btn btn-secondary">Nazad</a>

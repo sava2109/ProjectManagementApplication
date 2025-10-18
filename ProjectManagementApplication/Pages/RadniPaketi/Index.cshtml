@@ -1,0 +1,63 @@
+﻿@page
+@model ProjectManagementApplication.Pages.RadniPaketi.IndexModel
+@{
+    ViewData["Title"] = "Radni paketi";
+}
+
+<h1>Radni paketi</h1>
+
+<form method="get" class="mb-3">
+    <div class="input-group">
+        <input type="text" name="CurrentFilter" value="@Model.CurrentFilter" class="form-control" placeholder="Pretraži radne pakete..." />
+        <button type="submit" class="btn btn-primary">Pretraži</button>
+    </div>
+</form>
+
+<a asp-page="Create" class="btn btn-success mb-3">Dodaj novi radni paket</a>
+
+<div class="mb-2">
+    Sortiraj:
+    <a asp-route-SortOrder="naziv" asp-route-CurrentFilter="@Model.CurrentFilter"
+       class="@(Model.SortOrder == "naziv" ? "fw-bold text-primary" : "")">Naziv ↑</a> |
+    <a asp-route-SortOrder="naziv_desc" asp-route-CurrentFilter="@Model.CurrentFilter"
+       class="@(Model.SortOrder == "naziv_desc" ? "fw-bold text-primary" : "")">Naziv ↓</a> |
+    <a asp-route-SortOrder="planirani" asp-route-CurrentFilter="@Model.CurrentFilter"
+       class="@(Model.SortOrder == "planirani" ? "fw-bold text-primary" : "")">Planirani Sati ↑</a> |
+    <a asp-route-SortOrder="planirani_desc" asp-route-CurrentFilter="@Model.CurrentFilter"
+       class="@(Model.SortOrder == "planirani_desc" ? "fw-bold text-primary" : "")">Planirani Sati ↓</a>
+</div>
+
+@if (Model.RadniPaketi != null && Model.RadniPaketi.Any())
+{
+    <table class="table table-striped mt-3">
+        <thead>
+            <tr>
+                <th>Naziv</th>
+                <th>Opis</th>
+                <th>Planirani Sati</th>
+                <th>Projekat</th>
+                <th>Akcije</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var rp in Model.RadniPaketi)
+            {
+                <tr>
+                    <td>@rp.Naziv</td>
+                    <td>@rp.Opis</td>
+                    <td>@rp.PlaniraniSati</td>
+                    <td>@rp.Projekat.Naziv</td>
+                    <td>
+                        <a asp-page="Edit" asp-route-id="@rp.Id" class="btn btn-sm btn-warning">Izmeni</a>
+                        <a asp-page="Details" asp-route-id="@rp.Id" class="btn btn-sm btn-info">Detalji</a>
+                        <a asp-page="Delete" asp-route-id="@rp.Id" class="btn btn-sm btn-danger">Obriši</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p class="text-center text-muted">Nema pronađenih radnih paketa.</p>
+}

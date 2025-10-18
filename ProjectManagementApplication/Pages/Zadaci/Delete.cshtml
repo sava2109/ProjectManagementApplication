@@ -1,0 +1,21 @@
+﻿@page "{id:int}"
+@model ProjectManagementApplication.Pages.Zadaci.DeleteModel
+@{
+    ViewData["Title"] = "Obriši Zadatak";
+}
+
+<h1>Obriši Zadatak</h1>
+
+<p>Da li ste sigurni da želite da obrišete ovaj zadatak?</p>
+
+<div>
+    <p><strong>Naziv:</strong> @Model.Zadatak.Naziv</p>
+    <p><strong>Opis:</strong> @Model.Zadatak.Opis</p>
+    <p><strong>Planirani sati:</strong> @Model.Zadatak.PlaniraniSati</p>
+</div>
+
+<form method="post">
+    <input type="hidden" asp-for="Zadatak.Id" />
+    <button type="submit" class="btn btn-danger">Obriši</button>
+    <a asp-page="Index" class="btn btn-secondary">Nazad</a>
+</form>

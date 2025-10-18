@@ -1,0 +1,36 @@
+﻿@page
+@model ProjectManagementApplication.Pages.ZadaciNezavrseniModel
+@{
+    ViewData["Title"] = "Zadaci sa više od 50% nezavršenih aktivnosti";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+@if (!Model.ZadaciLista.Any())
+{
+    <p>Svi zadaci imaju manje od 50% nezavršenih aktivnosti.</p>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Zadatak</th>
+                <th>Ukupno aktivnosti</th>
+                <th>Nezavršene aktivnosti</th>
+                <th>Procenat nezavršenih</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var z in Model.ZadaciLista)
+            {
+                <tr>
+                    <td>@z.Zadatak.Naziv</td>
+                    <td>@z.UkupnoAktivnosti</td>
+                    <td>@z.NezavrseneAktivnosti</td>
+                    <td>@z.ProcenatNezavrsenih.ToString("0.##") %</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

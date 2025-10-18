@@ -1,0 +1,73 @@
+﻿@page "{id:int}"
+@model ProjectManagementApplication.Pages.ClanoviTima.EditModel
+@{
+    ViewData["Title"] = "Izmeni Člana Tima";
+}
+
+<h1>Izmeni Člana Tima</h1>
+
+<form method="post">
+    <input type="hidden" asp-for="ClanTimaForm.Id" />
+
+    <div class="mb-3">
+        <label class="form-label">Tim:</label>
+        <select asp-for="ClanTimaForm.TimId" class="form-select" asp-items="Model.TimoviLista">
+            <option value="">-- Izaberite tim --</option>
+        </select>
+        <span asp-validation-for="ClanTimaForm.TimId" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Zaposleni:</label>
+        <select asp-for="ClanTimaForm.ZaposleniId" class="form-select" id="zaposleniSelect">
+            <option value="">-- Izaberite zaposlenog --</option>
+            @foreach (var z in Model.ZaposleniLista)
+            {
+                <option value="@z.Id" data-pozicija="@z.Pozicija"
+                        selected="@(z.Id == Model.ClanTimaForm.ZaposleniId ? "selected" : "")">
+                    @z.Ime @z.Prezime
+                </option>
+            }
+        </select>
+        <span asp-validation-for="ClanTimaForm.ZaposleniId" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Uloga:</label>
+        <input asp-for="ClanTimaForm.Uloga" class="form-control" id="ulogaInput" />
+        <span asp-validation-for="ClanTimaForm.Uloga" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Datum pridruživanja:</label>
+        <input asp-for="ClanTimaForm.DatumPridruzivanja" type="date" class="form-control" />
+        <span asp-validation-for="ClanTimaForm.DatumPridruzivanja" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-success">Sačuvaj</button>
+    <a asp-page="Index" class="btn btn-secondary">Nazad</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        const selectZaposleni = document.getElementById('zaposleniSelect');
+        const inputUloga = document.getElementById('ulogaInput');
+
+        function updateUloga() {
+            const selectedOption = selectZaposleni.options[selectZaposleni.selectedIndex];
+            // samo inicijalno popuni ako je input prazan
+            if (!inputUloga.value) {
+                inputUloga.value = selectedOption.getAttribute('data-pozicija') || '';
+            }
+        }
+
+        selectZaposleni.addEventListener('change', () => {
+            const selectedOption = selectZaposleni.options[selectZaposleni.selectedIndex];
+            inputUloga.value = selectedOption.getAttribute('data-pozicija') || '';
+        });
+
+        // inicijalno popuni
+        updateUloga();
+    </script>
+}

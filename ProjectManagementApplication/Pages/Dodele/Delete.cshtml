@@ -1,0 +1,24 @@
+﻿@page "{id:int}"
+@model ProjectManagementApplication.Pages.Dodele.DeleteModel
+@{
+    ViewData["Title"] = "Obriši dodelu zadatka";
+}
+
+<h1>Obriši dodelu zadatka</h1>
+
+<p>Da li ste sigurni da želite da obrišete ovu dodelu zadatka?</p>
+
+<div class="mb-3">
+    <p><strong>Aktivnost:</strong> @Model.Dodela.Aktivnost.Naziv</p>
+</div>
+
+<div class="mb-3">
+    <p><strong>Zaposleni:</strong> @Model.Dodela.Zaposleni.Ime @Model.Dodela.Zaposleni.Prezime</p>
+</div>
+
+<div class="mt-4">
+    <form method="post" class="d-inline">
+        <button type="submit" class="btn btn-danger">Obriši</button>
+    </form>
+    <a asp-page="Index" class="btn btn-secondary">Nazad</a>
+</div>

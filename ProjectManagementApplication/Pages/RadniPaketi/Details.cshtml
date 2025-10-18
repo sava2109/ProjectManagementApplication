@@ -1,0 +1,26 @@
+﻿@page "{id:int}"
+@model ProjectManagementApplication.Pages.RadniPaketi.DetailsModel
+@{
+    ViewData["Title"] = "Detalji radnog paketa";
+}
+
+<h1>Detalji radnog paketa</h1>
+
+<div>
+    <dl class="row">
+        <dt class="col-sm-2">Naziv</dt>
+        <dd class="col-sm-10">@Model.RadniPaket.Naziv</dd>
+
+        <dt class="col-sm-2">Opis</dt>
+        <dd class="col-sm-10">@Model.RadniPaket.Opis</dd>
+
+        <dt class="col-sm-2">Planirani Sati</dt>
+        <dd class="col-sm-10">@Model.RadniPaket.PlaniraniSati</dd>
+
+        <dt class="col-sm-2">Projekat</dt>
+        <dd class="col-sm-10">@Model.RadniPaket.Projekat.Naziv</dd>
+    </dl>
+</div>
+
+<a asp-page="Edit" asp-route-id="@Model.RadniPaket.Id" class="btn btn-warning">Izmeni</a>
+<a asp-page="Index" class="btn btn-secondary">Nazad</a>

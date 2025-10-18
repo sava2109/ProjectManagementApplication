@@ -1,0 +1,18 @@
+﻿@page "{id:int}"
+@model ProjectManagementApplication.Pages.Timovi.DetailsModel
+@{
+    ViewData["Title"] = "Detalji Tima";
+}
+
+<h1>Detalji Tima</h1>
+
+<div class="mb-3">
+    <p><strong>Naziv tima:</strong> @Model.Tim.Naziv</p>
+</div>
+
+<div class="mb-3">
+    <p><strong>Projekat:</strong> @Model.Tim.Projekat?.Naziv</p>
+</div>
+
+<a asp-page="Edit" asp-route-id="@Model.Tim.Id" class="btn btn-warning">Izmeni</a>
+<a asp-page="Index" class="btn btn-secondary">Nazad</a>

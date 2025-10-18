@@ -1,0 +1,61 @@
+﻿@page
+@model ProjectManagementApplication.Pages.ZaposleniPages.IndexModel
+@{
+    ViewData["Title"] = "Zaposleni";
+}
+
+<h1>Zaposleni</h1>
+
+<form method="get" class="mb-3 d-flex">
+    <input type="text" name="SearchString" value="@Model.SearchString" class="form-control me-2" placeholder="Pretraži zaposlene..." />
+    <button type="submit" class="btn btn-primary">Pretraga</button>
+</form>
+
+<a asp-page="Create" class="btn btn-success mb-3">Dodaj novog zaposlenog</a>
+
+<div class="mb-2">
+    Sortiraj:
+    <a asp-route-SortOrder="ime" asp-route-SearchString="@Model.SearchString"
+       class="@(Model.SortOrder == "ime" ? "fw-bold text-primary" : "")">Ime ↑</a> |
+    <a asp-route-SortOrder="ime_desc" asp-route-SearchString="@Model.SearchString"
+       class="@(Model.SortOrder == "ime_desc" ? "fw-bold text-primary" : "")">Ime ↓</a> |
+    <a asp-route-SortOrder="prezime" asp-route-SearchString="@Model.SearchString"
+       class="@(Model.SortOrder == "prezime" ? "fw-bold text-primary" : "")">Prezime ↑</a> |
+    <a asp-route-SortOrder="prezime_desc" asp-route-SearchString="@Model.SearchString"
+       class="@(Model.SortOrder == "prezime_desc" ? "fw-bold text-primary" : "")">Prezime ↓</a>
+</div>
+
+@if (Model.ZaposleniLista != null && Model.ZaposleniLista.Any())
+{
+    <table class="table table-striped mt-3">
+        <thead>
+            <tr>
+                <th>Ime</th>
+                <th>Prezime</th>
+                <th>Email</th>
+                <th>Pozicija</th>
+                <th>Akcije</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var z in Model.ZaposleniLista)
+            {
+                <tr>
+                    <td>@z.Ime</td>
+                    <td>@z.Prezime</td>
+                    <td>@z.Email</td>
+                    <td>@z.Pozicija</td>
+                    <td>
+                        <a asp-page="Edit" asp-route-id="@z.Id" class="btn btn-warning btn-sm">Izmeni</a>
+                        <a asp-page="Details" asp-route-id="@z.Id" class="btn btn-info btn-sm">Detalji</a>
+                        <a asp-page="Delete" asp-route-id="@z.Id" class="btn btn-danger btn-sm">Obriši</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p class="text-center text-muted">Nema pronađenih zaposlenih.</p>
+}

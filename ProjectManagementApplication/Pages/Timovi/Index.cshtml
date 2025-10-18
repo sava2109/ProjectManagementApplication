@@ -1,0 +1,53 @@
+﻿@page
+@model ProjectManagementApplication.Pages.Timovi.IndexModel
+@{
+    ViewData["Title"] = "Timovi";
+}
+
+<h1>Timovi</h1>
+
+<form method="get" class="mb-3 d-flex">
+    <input type="text" name="SearchString" value="@Model.SearchString" class="form-control me-2" placeholder="Pretraži timove..." />
+    <button type="submit" class="btn btn-primary">Pretraga</button>
+</form>
+
+<a asp-page="Create" class="btn btn-success mb-3">Dodaj novi tim</a>
+
+<div class="mb-2">
+    Sortiraj:
+    <a asp-route-SortOrder="naziv" asp-route-SearchString="@Model.SearchString"
+       class="@(Model.SortOrder == "naziv" ? "fw-bold text-primary" : "")">Naziv ↑</a> |
+    <a asp-route-SortOrder="naziv_desc" asp-route-SearchString="@Model.SearchString"
+       class="@(Model.SortOrder == "naziv_desc" ? "fw-bold text-primary" : "")">Naziv ↓</a>
+</div>
+
+@if (Model.TimoviLista != null && Model.TimoviLista.Any())
+{
+    <table class="table table-striped mt-3">
+        <thead>
+            <tr>
+                <th>Naziv</th>
+                <th>Projekat</th>
+                <th>Akcije</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var tim in Model.TimoviLista)
+            {
+                <tr>
+                    <td>@tim.Naziv</td>
+                    <td>@tim.Projekat.Naziv</td>
+                    <td>
+                        <a asp-page="Edit" asp-route-id="@tim.Id" class="btn btn-warning btn-sm">Izmeni</a>
+                        <a asp-page="Details" asp-route-id="@tim.Id" class="btn btn-info btn-sm">Detalji</a>
+                        <a asp-page="Delete" asp-route-id="@tim.Id" class="btn btn-danger btn-sm">Obriši</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p class="text-center text-muted">Nema pronađenih timova.</p>
+}

@@ -1,0 +1,51 @@
+﻿@page
+@model ProjectManagementApplication.Pages.Aktivnosti.EditModel
+@{
+    ViewData["Title"] = "Izmeni Aktivnost";
+}
+
+<h1>Izmeni Aktivnost</h1>
+
+<form method="post">
+    <input type="hidden" asp-for="Aktivnost.Id" />
+
+    <div class="mb-3">
+        <label asp-for="Aktivnost.Naziv" class="form-label"></label>
+        <input asp-for="Aktivnost.Naziv" class="form-control" />
+        <span asp-validation-for="Aktivnost.Naziv" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Aktivnost.Opis" class="form-label"></label>
+        <textarea asp-for="Aktivnost.Opis" class="form-control"></textarea>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Aktivnost.PlaniraniSati" class="form-label"></label>
+        <input asp-for="Aktivnost.PlaniraniSati" type="number" class="form-control" />
+        <span asp-validation-for="Aktivnost.PlaniraniSati" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Aktivnost.ZadatakId" class="form-label"></label>
+        <select asp-for="Aktivnost.ZadatakId" class="form-select" asp-items="Model.ZadaciLista">
+            <option value="">-- Izaberite zadatak --</option>
+        </select>
+        <span asp-validation-for="Aktivnost.ZadatakId" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Aktivnost.Status" class="form-label"></label>
+        <select asp-for="Aktivnost.Status" class="form-select" asp-items="Model.StatusLista">
+            <option value="">-- Izaberite status --</option>
+        </select>
+        <span asp-validation-for="Aktivnost.Status" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Sačuvaj</button>
+    <a asp-page="Index" class="btn btn-secondary">Nazad</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,32 @@
+﻿@page "{id:int}"
+@model ProjectManagementApplication.Pages.Timovi.EditModel
+@{
+    ViewData["Title"] = "Izmeni Tim";
+}
+
+<h1>Izmeni Tim</h1>
+
+<form method="post">
+    <input type="hidden" asp-for="Tim.Id" />
+
+    <div class="mb-3">
+        <label asp-for="Tim.Naziv" class="form-label"></label>
+        <input asp-for="Tim.Naziv" class="form-control" />
+        <span asp-validation-for="Tim.Naziv" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Tim.ProjekatId" class="form-label"></label>
+        <select asp-for="Tim.ProjekatId" class="form-select" asp-items="Model.ProjektiLista">
+            <option value="">-- Izaberite projekat --</option>
+        </select>
+        <span asp-validation-for="Tim.ProjekatId" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-success">Sačuvaj</button>
+    <a asp-page="Index" class="btn btn-secondary">Nazad</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

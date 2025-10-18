@@ -1,0 +1,36 @@
+﻿@page
+@model ProjectManagementApplication.Pages.Dodele.CreateModel
+@{
+    ViewData["Title"] = "Dodaj novu dodelu zadatka";
+}
+
+<h1>Dodaj novu dodelu zadatka</h1>
+
+<form method="post">
+    <div class="mb-3">
+        <label class="form-label">Aktivnost:</label>
+        <select asp-for="DodelaForm.AktivnostId" class="form-select" asp-items="Model.AktivnostiLista">
+            <option value="">-- Izaberite aktivnost --</option>
+        </select>
+        <span asp-validation-for="DodelaForm.AktivnostId" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Zaposleni:</label>
+        <select asp-for="DodelaForm.ZaposleniId" class="form-select" id="zaposleniSelect">
+            <option value="">-- Izaberite zaposlenog --</option>
+            @foreach (var z in Model.ZaposleniLista)
+            {
+                <option value="@z.Id">@z.Ime @z.Prezime</option>
+            }
+        </select>
+        <span asp-validation-for="DodelaForm.ZaposleniId" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-success">Dodaj</button>
+    <a asp-page="Index" class="btn btn-secondary">Nazad</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

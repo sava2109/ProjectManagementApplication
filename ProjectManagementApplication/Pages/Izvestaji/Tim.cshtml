@@ -1,0 +1,42 @@
+﻿@page
+@model ProjectManagementApplication.Pages.Izvestaji.TimModel
+@{
+    ViewData["Title"] = "Izveštaj po timu";
+}
+
+<h1 class="mb-4">📊 Izveštaj po timu</h1>
+
+<form method="get">
+    <div class="form-group">
+        <label for="timId">Tim:</label>
+        <select id="timId" name="TimId" class="form-control" asp-items="Model.TimSelect">
+            <option value="">-- Izaberite tim --</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Traži</button>
+</form>
+
+@if (Model.TimId.HasValue)
+{
+    <h3>Ukupno članova: @Model.UkupnoClanova</h3>
+
+    <table class="table table-bordered table-striped mt-3">
+        <thead class="table-light">
+            <tr>
+                <th>Ime i prezime</th>
+                <th>Uloga</th>
+                <th>Datum pridruživanja</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var clan in Model.ClanoviTima)
+            {
+                <tr>
+                    <td>@clan.Zaposleni.Ime @clan.Zaposleni.Prezime</td>
+                    <td>@clan.Uloga</td>
+                    <td>@clan.DatumPridruzivanja.ToShortDateString()</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

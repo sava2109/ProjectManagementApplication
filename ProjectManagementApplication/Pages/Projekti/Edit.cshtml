@@ -1,0 +1,38 @@
+﻿@page "{id:int}"
+@model ProjectManagementApplication.Pages.Projekti.EditModel
+@{
+    ViewData["Title"] = "Edit Projekat";
+}
+
+<h1>Izmeni Projekat</h1>
+
+<form method="post">
+    <input type="hidden" asp-for="Projekat.Id" />
+    <div class="form-group">
+        <label>Naziv</label>
+        <input asp-for="Projekat.Naziv" class="form-control" />
+        <span asp-validation-for="Projekat.Naziv" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label>Opis</label>
+        <textarea asp-for="Projekat.Opis" class="form-control"></textarea>
+    </div>
+    <div class="form-group">
+        <label>Planirani Sati</label>
+        <input asp-for="Projekat.PlaniraniSati" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Datum početka</label>
+        <input asp-for="Projekat.DatumPocetka" type="date" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Datum završetka</label>
+        <input asp-for="Projekat.DatumZavrsetka" type="date" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-success">Sačuvaj</button>
+    <a asp-page="Index" class="btn btn-secondary">Nazad</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

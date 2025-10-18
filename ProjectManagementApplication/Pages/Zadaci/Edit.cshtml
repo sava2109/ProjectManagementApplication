@@ -1,0 +1,44 @@
+﻿@page "{id:int}"
+@model ProjectManagementApplication.Pages.Zadaci.EditModel
+@{
+    ViewData["Title"] = "Izmeni Zadatak";
+}
+
+<h1>Izmeni Zadatak</h1>
+
+<form method="post">
+    <input type="hidden" asp-for="Zadatak.Id" />
+
+    <div class="form-group">
+        <label asp-for="Zadatak.Naziv" class="form-label"></label>
+        <input asp-for="Zadatak.Naziv" class="form-control" />
+        <span asp-validation-for="Zadatak.Naziv" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Zadatak.Opis" class="form-label"></label>
+        <textarea asp-for="Zadatak.Opis" class="form-control"></textarea>
+        <span asp-validation-for="Zadatak.Opis" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Zadatak.PlaniraniSati" class="form-label"></label>
+        <input asp-for="Zadatak.PlaniraniSati" type="number" class="form-control" />
+        <span asp-validation-for="Zadatak.PlaniraniSati" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Zadatak.RadniPaketId" class="form-label"></label>
+        <select asp-for="Zadatak.RadniPaketId" class="form-select" asp-items="Model.RadniPaketiLista">
+            <option value="">-- Izaberite radni paket --</option>
+        </select>
+        <span asp-validation-for="Zadatak.RadniPaketId" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-success">Sačuvaj</button>
+    <a asp-page="Index" class="btn btn-secondary">Nazad</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

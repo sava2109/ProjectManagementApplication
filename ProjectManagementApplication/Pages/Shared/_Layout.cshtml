@@ -1,0 +1,164 @@
+﻿<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Upravljanje projektima</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" />
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="~/css/site.css" />
+    
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #64748b;
+            --hover-color: #1e40af;
+            --bg-light: #f8fafc;
+            --border-color: #e2e8f0;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: var(--bg-light);
+            color: #334155;
+        }
+        
+        .modern-nav {
+            background: white;
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        
+        .modern-nav .navbar-brand {
+            color: #1e293b;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .modern-nav .nav-link {
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+            padding: 0.5rem 0.75rem;
+            transition: all 0.2s;
+            border-radius: 6px;
+        }
+        
+        .modern-nav .nav-link:hover {
+            color: var(--primary-color);
+            background: #f1f5f9;
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 16px;
+            margin-bottom: 3rem;
+        }
+        
+        .modern-card {
+            display: flex;
+            align-items: center;
+            padding: 1rem 1.25rem;
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            text-decoration: none;
+            color: #334155;
+            transition: all 0.3s ease;
+            margin-bottom: 0.75rem;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+        
+        .modern-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+        
+        .modern-card .icon-wrapper {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f1f5f9;
+            border-radius: 10px;
+            margin-right: 1rem;
+            transition: all 0.3s;
+        }
+        
+        .modern-card:hover .icon-wrapper {
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        .modern-card .icon-wrapper i {
+            font-size: 1.25rem;
+        }
+        
+        .card-group-title h5 {
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 600;
+        }
+        
+        footer {
+            border-top: 1px solid var(--border-color);
+            padding-top: 2rem;
+            margin-top: 4rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg modern-nav">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-page="/Index">
+                    <i class="bi bi-grid-3x3-gap me-2"></i>Projekti
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link" asp-page="/Projekti/Index">Projekti</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-page="/RadniPaketi/Index">Paketi</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-page="/Zadaci/Index">Zadaci</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-page="/Aktivnosti/Index">Aktivnosti</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-page="/ZaposleniPages/Index">Zaposleni</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-page="/Timovi/Index">Timovi</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-page="/ClanoviTima/Index">Članovi</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-page="/Dodele/Index">Dodele</a></li>
+                        @* DODATNE FUNKCIONALNOSTI - zakomentirano *@
+                        @* <li class="nav-item"><a class="nav-link" asp-page="/Izvestaji/Zaposleni">Izveštaj po zaposlenom</a></li> *@
+                        @* <li class="nav-item"><a class="nav-link" asp-page="/Izvestaji/Projekat">Izveštaj po projektu</a></li> *@
+                        @* <li class="nav-item"><a class="nav-link" asp-page="/Izvestaji/Tim">Izveštaj po timu</a></li> *@
+                        @* <li class="nav-item"><a class="nav-link" asp-page="/Izvestaji/Statistika">Statistika</a></li> *@
+                        @* <li class="nav-item"><a class="nav-link" asp-page="/AktivnostiViseZaposlenih">AktivnostiZaposleni</a></li> *@
+                        @* <li class="nav-item"><a class="nav-link" asp-page="/ZadaciNezavrseni">NezavrseniZadaci</a></li> *@
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+
+    <main class="container mt-4">
+        @RenderBody()
+    </main>
+
+    <footer class="text-center text-muted">
+        <p class="mb-0">&copy; 2025 Upravljanje projektima</p>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

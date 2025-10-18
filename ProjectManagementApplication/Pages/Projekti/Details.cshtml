@@ -1,0 +1,29 @@
+﻿@page "{id:int}"
+@model ProjectManagementApplication.Pages.Projekti.DetailsModel
+@{
+    ViewData["Title"] = "Detalji Projekta";
+}
+
+<h1>Detalji Projekta</h1>
+
+<div>
+    <dl class="row">
+        <dt class="col-sm-2">Naziv</dt>
+        <dd class="col-sm-10">@Model.Projekat.Naziv</dd>
+
+        <dt class="col-sm-2">Opis</dt>
+        <dd class="col-sm-10">@Model.Projekat.Opis</dd>
+
+        <dt class="col-sm-2">Planirani Sati</dt>
+        <dd class="col-sm-10">@Model.Projekat.PlaniraniSati</dd>
+
+        <dt class="col-sm-2">Datum početka</dt>
+        <dd class="col-sm-10">@Model.Projekat.DatumPocetka.ToShortDateString()</dd>
+
+        <dt class="col-sm-2">Datum završetka</dt>
+        <dd class="col-sm-10">@Model.Projekat.DatumZavrsetka.ToShortDateString()</dd>
+    </dl>
+</div>
+
+<a asp-page="Edit" asp-route-id="@Model.Projekat.Id" class="btn btn-warning">Izmeni</a>
+<a asp-page="Index" class="btn btn-secondary">Nazad</a>

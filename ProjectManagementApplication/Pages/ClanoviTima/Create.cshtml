@@ -1,0 +1,58 @@
+﻿@page
+@model ProjectManagementApplication.Pages.ClanoviTima.CreateModel
+@{
+    ViewData["Title"] = "Dodaj Člana Tima";
+}
+
+<h1>Dodaj Člana Tima</h1>
+
+<form method="post">
+    <div class="mb-3">
+        <label class="form-label">Tim:</label>
+        <select asp-for="ClanTima.TimId" class="form-select" asp-items="Model.TimoviLista">
+            <option value="">-- Izaberite tim --</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Zaposleni:</label>
+        <select asp-for="ClanTima.ZaposleniId" class="form-select" id="zaposleniSelect">
+            <option value="">-- Izaberite zaposlenog --</option>
+            @foreach (var z in Model.ZaposleniLista)
+            {
+                <option value="@z.Id" data-pozicija="@z.Pozicija">@z.Ime @z.Prezime</option>
+            }
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Uloga:</label>
+        <input asp-for="ClanTima.Uloga" class="form-control" id="ulogaInput" />
+        <small class="form-text text-muted">Možete izmeniti ulogu ako želite drugačiju od pozicije zaposlenog.</small>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Datum pridruživanja:</label>
+        <input asp-for="ClanTima.DatumPridruzivanja" type="date" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-success">Dodaj</button>
+    <a asp-page="Index" class="btn btn-secondary">Nazad</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        const selectZaposleni = document.getElementById('zaposleniSelect');
+        const inputUloga = document.getElementById('ulogaInput');
+
+        selectZaposleni.addEventListener('change', function () {
+            const selectedOption = this.options[this.selectedIndex];
+            const pozicija = selectedOption.getAttribute('data-pozicija') || '';
+            // Popuni samo ako polje trenutno nema vrednost
+            if (!inputUloga.value) {
+                inputUloga.value = pozicija;
+            }
+        });
+    </script>
+}

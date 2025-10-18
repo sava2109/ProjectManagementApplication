@@ -1,0 +1,23 @@
+﻿@page "{id:int}"
+@model ProjectManagementApplication.Pages.ZaposleniPages.DetailsModel
+@{
+    ViewData["Title"] = "Detalji Zaposlenog";
+}
+
+<h1>Detalji Zaposlenog</h1>
+
+<div class="mb-3">
+    <strong>Ime:</strong> @Model.Zaposleni.Ime
+</div>
+<div class="mb-3">
+    <strong>Prezime:</strong> @Model.Zaposleni.Prezime
+</div>
+<div class="mb-3">
+    <strong>Email:</strong> @Model.Zaposleni.Email
+</div>
+<div class="mb-3">
+    <strong>Pozicija:</strong> @Model.Zaposleni.Pozicija
+</div>
+
+<a asp-page="Edit" asp-route-id="@Model.Zaposleni.Id" class="btn btn-warning">Izmeni</a>
+<a asp-page="Index" class="btn btn-secondary">Nazad</a>

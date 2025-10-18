@@ -1,0 +1,30 @@
+﻿@page "{id:int}"
+@model ProjectManagementApplication.Pages.RadniPaketi.DeleteModel
+@{
+    ViewData["Title"] = "Obriši radni paket";
+}
+
+<h1>Obriši radni paket</h1>
+
+<p>Da li ste sigurni da želite da obrišete ovaj radni paket?</p>
+
+<div>
+    <dl class="row">
+        <dt class="col-sm-2">Naziv</dt>
+        <dd class="col-sm-10">@Model.RadniPaket.Naziv</dd>
+
+        <dt class="col-sm-2">Opis</dt>
+        <dd class="col-sm-10">@Model.RadniPaket.Opis</dd>
+
+        <dt class="col-sm-2">Planirani Sati</dt>
+        <dd class="col-sm-10">@Model.RadniPaket.PlaniraniSati</dd>
+
+        <dt class="col-sm-2">Projekat</dt>
+        <dd class="col-sm-10">@Model.RadniPaket.Projekat.Naziv</dd>
+    </dl>
+</div>
+
+<form method="post">
+    <button type="submit" class="btn btn-danger">Obriši</button>
+    <a asp-page="Index" class="btn btn-secondary">Nazad</a>
+</form>

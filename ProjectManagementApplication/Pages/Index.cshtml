@@ -1,0 +1,91 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Početna";
+}
+
+<div class="hero-section text-center mb-5 py-5">
+    <h1 class="display-4 fw-light mb-3">Upravljanje projektima</h1>
+    <p class="text-muted fs-5">Moderna aplikacija za upravljanje projektima i timovima</p>
+</div>
+
+<div class="row g-4 justify-content-center">
+    <!-- Projekti grupa -->
+    <div class="col-lg-3 col-md-6">
+        <div class="card-group-title mb-3">
+            <h5 class="text-muted fw-light">Struktura projekta</h5>
+        </div>
+        <a class="modern-card" asp-page="/Projekti/Index">
+            <div class="icon-wrapper">
+                <i class="bi bi-kanban"></i>
+            </div>
+            <span>Projekti</span>
+        </a>
+        <a class="modern-card" asp-page="/RadniPaketi/Index">
+            <div class="icon-wrapper">
+                <i class="bi bi-box-seam"></i>
+            </div>
+            <span>Radni paketi</span>
+        </a>
+        <a class="modern-card" asp-page="/Zadaci/Index">
+            <div class="icon-wrapper">
+                <i class="bi bi-list-task"></i>
+            </div>
+            <span>Zadaci</span>
+        </a>
+        <a class="modern-card" asp-page="/Aktivnosti/Index">
+            <div class="icon-wrapper">
+                <i class="bi bi-clock-history"></i>
+            </div>
+            <span>Aktivnosti</span>
+        </a>
+    </div>
+
+    <!-- Zaposleni grupa -->
+    <div class="col-lg-3 col-md-6">
+        <div class="card-group-title mb-3">
+            <h5 class="text-muted fw-light">Tim i resursi</h5>
+        </div>
+        <a class="modern-card" asp-page="/ZaposleniPages/Index">
+            <div class="icon-wrapper">
+                <i class="bi bi-people"></i>
+            </div>
+            <span>Zaposleni</span>
+        </a>
+        <a class="modern-card" asp-page="/Timovi/Index">
+            <div class="icon-wrapper">
+                <i class="bi bi-person-lines-fill"></i>
+            </div>
+            <span>Timovi</span>
+        </a>
+        <a class="modern-card" asp-page="/ClanoviTima/Index">
+            <div class="icon-wrapper">
+                <i class="bi bi-person-plus"></i>
+            </div>
+            <span>Članovi tima</span>
+        </a>
+        <a class="modern-card" asp-page="/Dodele/Index">
+            <div class="icon-wrapper">
+                <i class="bi bi-person-check"></i>
+            </div>
+            <span>Dodele zadataka</span>
+        </a>
+    </div>
+
+    @* DODATNE FUNKCIONALNOSTI - zakomentirano *@
+    @* <!-- Treća kolona: Izveštaji -->
+    <div class="col-md-3 d-flex flex-column gap-3 mb-3">
+        <a class="btn btn-light btn-lg text-dark shadow-sm d-flex align-items-center" asp-page="/Izvestaji/Zaposleni">
+            <i class="bi bi-journal-text me-2"></i> Izveštaj po zaposlenom
+        </a>
+        <a class="btn btn-light btn-lg text-dark shadow-sm d-flex align-items-center" asp-page="/Izvestaji/Projekat">
+            <i class="bi bi-journal-text me-2"></i> Izveštaj po projektu
+        </a>
+        <a class="btn btn-light btn-lg text-dark shadow-sm d-flex align-items-center" asp-page="/Izvestaji/Tim">
+            <i class="bi bi-journal-text me-2"></i> Izveštaj po timu
+        </a>
+        <a class="btn btn-light btn-lg text-dark shadow-sm d-flex align-items-center" asp-page="/Izvestaji/Statistika">
+            <i class="bi bi-graph-up me-2"></i> Statistika
+        </a>
+    </div> *@
+</div>

@@ -1,0 +1,131 @@
+﻿@page
+@model ProjectManagementApplication.Pages.Izvestaji.ProjekatModel
+@{
+    ViewData["Title"] = "Izveštaj po projektu";
+}
+
+<h1 class="mb-4">📊 Izveštaj po projektu</h1>
+
+<form method="get" class="mb-4">
+    <div class="form-group">
+        <label for="projekatId">Izaberite projekat:</label>
+        <select id="projekatId" name="projekatId" class="form-control w-50">
+            <option value="">-- Izaberite projekat --</option>
+            @foreach (var p in Model.Projekti)
+            {
+                <option value="@p.Id" selected="@(Model.IzabraniProjekatId == p.Id)">
+                    @p.Naziv
+                </option>
+            }
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary mt-2">Traži</button>
+</form>
+
+@if (Model.IzabraniProjekat != null)
+{
+    <div class="card mb-4">
+        <div class="card-body">
+            <h3>@Model.IzabraniProjekat.Naziv</h3>
+            <p>@Model.IzabraniProjekat.Opis</p>
+            <p><strong>Planirani dani:</strong> @Model.IzabraniProjekat.PlaniraniSati</p>
+            <p>
+                <strong>Period:</strong> @Model.IzabraniProjekat.DatumPocetka.ToShortDateString() -
+                @Model.IzabraniProjekat.DatumZavrsetka.ToShortDateString()
+            </p>
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-body">
+            <h4>📈 Statistika</h4>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Ukupno radnih paketa: <strong>@Model.UkupnoRadnihPaketa</strong></li>
+                <li class="list-group-item">Ukupno zadataka: <strong>@Model.UkupnoZadataka</strong></li>
+                <li class="list-group-item">Ukupno aktivnosti: <strong>@Model.UkupnoAktivnosti</strong></li>
+            </ul>
+        </div>
+    </div>
+
+    <h3>📂 Struktura projekta</h3>
+    <div class="accordion" id="accordionProjekat">
+        @foreach (var rp in Model.IzabraniProjekat.RadniPaketi)
+        {
+            var rpId = $"rp{rp.Id}";
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="heading-@rpId">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-@rpId">
+                        🗂 Radni paket: @rp.Naziv
+                    </button>
+                </h2>
+                <div id="collapse-@rpId" class="accordion-collapse collapse" data-bs-parent="#accordionProjekat">
+                    <div class="accordion-body">
+
+                        @foreach (var z in rp.Zadatci)
+                        {
+                            <div class="card mb-3">
+                                <div class="card-header">
+                                    ✅ Zadatak: @z.Naziv
+                                </div>
+                                <div class="card-body">
+                                    <table class="table table-sm table-bordered">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th>Aktivnost</th>
+                                                <th>Opis</th>
+                                                <th>Planirani sati</th>
+                                                <th>Status</th>
+                                                <th>Zaposleni</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var a in z.Aktivnosti)
+                                            {
+                                                <tr>
+                                                    <td>@a.Naziv</td>
+                                                    <td>@a.Opis</td>
+                                                    <td>@a.PlaniraniSati</td>
+                                                    <td>
+                                                        @* Boje i ikone za status *@
+                                                        @if (a.Status.Trim().ToLower() == "završeno" || a.Status.Trim().ToLower() == "zavrseno")
+                                                        {
+                                                            <span class="text-success">🟢 @a.Status</span>
+                                                        }
+                                                        else if (a.Status.Trim().ToLower() == "u toku")
+                                                        {
+                                                            <span class="text-warning">🟡 @a.Status</span>
+                                                        }
+                                                        else if (a.Status.Trim().ToLower() == "kašnjenje")
+                                                        {
+                                                            <span class="text-danger">🔴 @a.Status</span>
+                                                        }
+                                                        else if (a.Status.Trim().ToLower() == "planirano")
+                                                        {
+                                                            <span class="text-primary">🔵 @a.Status</span>
+                                                        }
+                                                        else
+                                                        {
+                                                            <span>@a.Status</span>
+                                                        }
+
+                                                    </td>
+                                                    <td>
+                                                        @foreach (var d in a.Dodele)
+                                                        {
+                                                            @($"{d.Zaposleni.Ime} {d.Zaposleni.Prezime}")
+                                                            <br />
+                                                        }
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}

@@ -1,0 +1,41 @@
+﻿@page
+@model ProjectManagementApplication.Pages.Zadaci.CreateModel
+@{
+    ViewData["Title"] = "Dodaj Zadatak";
+}
+
+<h1>Dodaj Zadatak</h1>
+
+<form method="post">
+    <div class="mb-3">
+        <label asp-for="Zadatak.Naziv" class="form-label"></label>
+        <input asp-for="Zadatak.Naziv" class="form-control" />
+        <span asp-validation-for="Zadatak.Naziv" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Zadatak.Opis" class="form-label"></label>
+        <textarea asp-for="Zadatak.Opis" class="form-control"></textarea>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Zadatak.PlaniraniSati" class="form-label"></label>
+        <input asp-for="Zadatak.PlaniraniSati" type="number" class="form-control" />
+        <span asp-validation-for="Zadatak.PlaniraniSati" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Zadatak.RadniPaketId" class="form-label"></label>
+        <select asp-for="Zadatak.RadniPaketId" class="form-select" asp-items="Model.RadniPaketiLista">
+            <option value="">-- Izaberite radni paket --</option>
+        </select>
+        <span asp-validation-for="Zadatak.RadniPaketId" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-success">Dodaj</button>
+    <a asp-page="Index" class="btn btn-secondary">Nazad</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

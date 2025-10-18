@@ -1,0 +1,80 @@
+﻿@page
+@model ProjectManagementApplication.Pages.Izvestaji.StatistikaModel
+@{
+    ViewData["Title"] = "Statistika";
+}
+
+<h1 class="mb-4">📊 Statistika projekta</h1>
+
+<div class="row mb-4">
+    <div class="col-md-4">
+        <div class="card text-center">
+            <div class="card-body">
+                <h5>Ukupno projekata</h5>
+                <h2>@Model.UkupnoProjekata</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-center">
+            <div class="card-body">
+                <h5>Ukupno zaposlenih</h5>
+                <h2>@Model.UkupnoZaposlenih</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-center">
+            <div class="card-body">
+                <h5>Ukupno dodela</h5>
+                <h2>@Model.UkupnoDodela</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h3>📊 Broj zadataka po zaposlenom</h3>
+<canvas id="barChart" width="200" height="100"></canvas>
+
+<h3 class="mt-4">📊 Raspodela zadataka po statusu</h3>
+<canvas id="pieChart" width="400" height="150"></canvas>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Bar chart
+        const barCtx = document.getElementById('barChart').getContext('2d');
+        const barChart = new Chart(barCtx, {
+            type: 'bar',
+            data: {
+                labels: @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.ZadaciPoZaposlenom.Select(d => d.Label))),
+                datasets: [{
+                    label: 'Broj zadataka',
+                    data: @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.ZadaciPoZaposlenom.Select(d => d.Value))),
+                    backgroundColor: 'rgba(54, 162, 235, 0.7)'
+                }]
+            },
+            options: { responsive: true }
+        });
+
+        // Pie chart
+        const pieCtx = document.getElementById('pieChart').getContext('2d');
+        const pieChart = new Chart(pieCtx, {
+            type: 'pie',
+            data: {
+                labels: @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.ZadaciPoStatusu.Select(d => d.Label))),
+                datasets: [{
+                    data: @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.ZadaciPoStatusu.Select(d => d.Value))),
+                    backgroundColor: [
+                        'rgba(255, 182, 193, 0.6)',
+                        'rgba(135, 206, 250, 0.6)',
+                        'rgba(255, 239, 128, 0.6)',
+                        'rgba(144, 238, 144, 0.6)'
+                        
+                    ]
+                }]
+            },
+            options: { responsive: true }
+        });
+    </script>
+}

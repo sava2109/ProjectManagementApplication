@@ -1,0 +1,43 @@
+﻿@page "{id:int}"
+@model ProjectManagementApplication.Pages.RadniPaketi.EditModel
+@{
+    ViewData["Title"] = "Izmeni radni paket";
+}
+
+<h1>Izmeni radni paket</h1>
+
+<form method="post">
+    <input type="hidden" asp-for="RadniPaket.Id" />
+
+    <div class="form-group">
+        <label asp-for="RadniPaket.Naziv" class="form-label"></label>
+        <input asp-for="RadniPaket.Naziv" class="form-control" />
+        <span asp-validation-for="RadniPaket.Naziv" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="RadniPaket.Opis" class="form-label"></label>
+        <textarea asp-for="RadniPaket.Opis" class="form-control"></textarea>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="RadniPaket.PlaniraniSati" class="form-label"></label>
+        <input asp-for="RadniPaket.PlaniraniSati" type="number" class="form-control" />
+        <span asp-validation-for="RadniPaket.PlaniraniSati" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="RadniPaket.ProjekatId" class="form-label"></label>
+        <select asp-for="RadniPaket.ProjekatId" class="form-select" asp-items="Model.ProjektiSelectList">
+            <option value="">-- Izaberite projekat --</option>
+        </select>
+        <span asp-validation-for="RadniPaket.ProjekatId" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-success">Sačuvaj</button>
+    <a asp-page="Index" class="btn btn-secondary">Nazad</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
