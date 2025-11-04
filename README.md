@@ -202,8 +202,8 @@ Sugestije i doprinosi su dobrodošli! Slobodno otvorite issue ili pull request.
 
 ## 📞 Kontakt
 
-- GitHub: [@vase-korisnicko-ime](https://github.com/vase-korisnicko-ime)
-- Email: vas.email@example.com
+- GitHub: [@sava2109](https://github.com/sava2109)
+- Email: savadimitrijevic2109@gmail.com
 
 ---
 
